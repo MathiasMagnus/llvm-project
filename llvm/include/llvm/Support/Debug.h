@@ -28,6 +28,8 @@
 #ifndef LLVM_SUPPORT_DEBUG_H
 #define LLVM_SUPPORT_DEBUG_H
 
+#include "llvm/Support/Compiler.h"
+
 namespace llvm {
 
 class raw_ostream;
@@ -76,7 +78,7 @@ void setCurrentDebugTypes(const char **Types, unsigned Count);
 /// is specified.  This should probably not be referenced directly, instead, use
 /// the DEBUG macro below.
 ///
-extern bool DebugFlag;
+LLVM_ABI extern bool DebugFlag;
 
 /// EnableDebugBuffering - This defaults to false.  If true, the debug
 /// stream will install signal handlers to dump any buffered debug

@@ -20,7 +20,7 @@
 namespace llvm {
 
 /// Common stuff for mutable and immutable StreamRefs.
-template <class RefType, class StreamType> class BinaryStreamRefBase {
+template <class RefType, class StreamType> class LLVM_ABI BinaryStreamRefBase {
 protected:
   BinaryStreamRefBase() = default;
   explicit BinaryStreamRefBase(StreamType &BorrowedImpl)
@@ -150,7 +150,7 @@ protected:
 /// general, you should not pass around pointers or references to BinaryStreams
 /// and use inheritance to achieve polymorphism.  Instead, you should pass
 /// around BinaryStreamRefs by value and achieve polymorphism that way.
-class BinaryStreamRef
+class LLVM_ABI BinaryStreamRef
     : public BinaryStreamRefBase<BinaryStreamRef, BinaryStream> {
   friend BinaryStreamRefBase<BinaryStreamRef, BinaryStream>;
   friend class WritableBinaryStreamRef;
@@ -193,7 +193,7 @@ public:
                                    ArrayRef<uint8_t> &Buffer) const;
 };
 
-struct BinarySubstreamRef {
+struct LLVM_ABI BinarySubstreamRef {
   uint64_t Offset = 0;        // Offset in the parent stream
   BinaryStreamRef StreamData; // Stream Data
 
@@ -214,7 +214,7 @@ struct BinarySubstreamRef {
   bool empty() const { return size() == 0; }
 };
 
-class WritableBinaryStreamRef
+class LLVM_ABI WritableBinaryStreamRef
     : public BinaryStreamRefBase<WritableBinaryStreamRef,
                                  WritableBinaryStream> {
   friend BinaryStreamRefBase<WritableBinaryStreamRef, WritableBinaryStream>;

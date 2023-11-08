@@ -21,7 +21,7 @@ namespace llvm {
 class StringRef;
 class ScopedPrinter;
 
-class ELFAttributeParser {
+class LLVM_ABI ELFAttributeParser {
   StringRef vendor;
   std::unordered_map<unsigned, unsigned> attributes;
   std::unordered_map<unsigned, StringRef> attributesStr;

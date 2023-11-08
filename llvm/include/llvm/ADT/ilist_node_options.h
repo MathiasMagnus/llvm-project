@@ -59,7 +59,8 @@ typedef explicitness<false> is_implicit;
 /// \li specialize \c is_valid_option<ilist_foo<Bar>> to inherit from \c
 /// std::true_type to get static assertions passing in \a simple_ilist and \a
 /// ilist_node.
-template <class Option> struct is_valid_option : std::false_type {};
+template <class Option>
+struct LLVM_ABI is_valid_option : std::false_type {};
 
 /// Extract sentinel tracking option.
 ///
@@ -67,20 +68,22 @@ template <class Option> struct is_valid_option : std::false_type {};
 /// default depending on LLVM_ENABLE_ABI_BREAKING_CHECKS.
 template <class... Options> struct extract_sentinel_tracking;
 template <bool EnableSentinelTracking, class... Options>
-struct extract_sentinel_tracking<
+struct LLVM_ABI extract_sentinel_tracking<
     ilist_sentinel_tracking<EnableSentinelTracking>, Options...>
     : std::integral_constant<bool, EnableSentinelTracking>, is_explicit {};
 template <class Option1, class... Options>
-struct extract_sentinel_tracking<Option1, Options...>
+struct LLVM_ABI extract_sentinel_tracking<Option1, Options...>
     : extract_sentinel_tracking<Options...> {};
 #if LLVM_ENABLE_ABI_BREAKING_CHECKS
 template <> struct extract_sentinel_tracking<> : std::true_type, is_implicit {};
 #else
 template <>
-struct extract_sentinel_tracking<> : std::false_type, is_implicit {};
+struct LLVM_ABI extract_sentinel_tracking<> : std::false_type,
+                                                      is_implicit {};
 #endif
 template <bool EnableSentinelTracking>
-struct is_valid_option<ilist_sentinel_tracking<EnableSentinelTracking>>
+struct LLVM_ABI
+    is_valid_option<ilist_sentinel_tracking<EnableSentinelTracking>>
     : std::true_type {};
 
 /// Extract custom tag option.

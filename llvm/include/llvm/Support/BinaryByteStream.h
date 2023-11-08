@@ -85,7 +85,7 @@ public:
 /// in a single contiguous buffer.  As with BinaryByteStream, the mutable
 /// version also guarantees that no read operation will ever incur a copy,
 /// and similarly it does not own the underlying buffer.
-class MutableBinaryByteStream : public WritableBinaryStream {
+class LLVM_ABI MutableBinaryByteStream : public WritableBinaryStream {
 public:
   MutableBinaryByteStream() = default;
   MutableBinaryByteStream(MutableArrayRef<uint8_t> Data,
@@ -198,7 +198,7 @@ public:
 
 /// An implementation of WritableBinaryStream backed by an llvm
 /// FileOutputBuffer.
-class FileBufferByteStream : public WritableBinaryStream {
+class LLVM_ABI FileBufferByteStream : public WritableBinaryStream {
 private:
   class StreamImpl : public MutableBinaryByteStream {
   public:

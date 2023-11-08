@@ -67,7 +67,7 @@ inline raw_ostream &operator << (raw_ostream &OS, RoundingMode RM) {
 
 /// Represent subnormal handling kind for floating point instruction inputs and
 /// outputs.
-struct DenormalMode {
+struct LLVM_ABI DenormalMode {
   /// Represent handled modes for denormal (aka subnormal) modes in the floating
   /// point environment.
   enum DenormalModeKind : int8_t {

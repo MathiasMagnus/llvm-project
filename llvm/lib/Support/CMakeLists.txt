@@ -329,7 +329,12 @@ if(LLVM_ENABLE_TERMINFO)
   set(llvm_system_libs ${llvm_system_libs} "${terminfo_library}")
 endif()
 
-set_property(TARGET LLVMSupport PROPERTY LLVM_SYSTEM_LIBS "${llvm_system_libs}")
+set_target_properties(LLVMSupport PROPERTIES
+  LLVM_SYSTEM_LIBS "${llvm_system_libs}"
+  DEFINE_SYMBOL "LLVM_ABI_EXPORTS"
+  C_VISIBILITY_PRESET hidden
+  CXX_VISIBILITY_PRESET hidden
+  VISIBILITY_INLINES_HIDDEN YES)
 
 
 if(LLVM_INTEGRATED_CRT_ALLOC)

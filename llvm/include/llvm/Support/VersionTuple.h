@@ -26,7 +26,7 @@ class raw_ostream;
 class StringRef;
 
 /// Represents a version number in the form major[.minor[.subminor[.build]]].
-class VersionTuple {
+class LLVM_ABI VersionTuple {
   unsigned Major : 32;
 
   unsigned Minor : 31;
@@ -188,10 +188,11 @@ public:
 };
 
 /// Print a version number.
-raw_ostream &operator<<(raw_ostream &Out, const VersionTuple &V);
+LLVM_ABI raw_ostream &operator<<(raw_ostream &Out,
+                                         const VersionTuple &V);
 
 // Provide DenseMapInfo for version tuples.
-template <> struct DenseMapInfo<VersionTuple> {
+template <> struct LLVM_ABI DenseMapInfo<VersionTuple> {
   static inline VersionTuple getEmptyKey() { return VersionTuple(0x7FFFFFFF); }
   static inline VersionTuple getTombstoneKey() {
     return VersionTuple(0x7FFFFFFE);

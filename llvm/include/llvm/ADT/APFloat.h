@@ -139,7 +139,7 @@ enum lostFraction { // Example of truncated bits:
 // This is the common type definitions shared by APFloat and its internal
 // implementation classes. This struct should not define any non-static data
 // members.
-struct APFloatBase {
+struct LLVM_ABI APFloatBase {
   typedef APInt::WordType integerPart;
   static constexpr unsigned integerPartWidth = APInt::APINT_BITS_PER_WORD;
 
@@ -290,7 +290,7 @@ struct APFloatBase {
 
 namespace detail {
 
-class IEEEFloat final : public APFloatBase {
+class LLVM_ABI IEEEFloat final : public APFloatBase {
 public:
   /// \name Constructors
   /// @{
@@ -668,16 +668,16 @@ private:
   unsigned int sign : 1;
 };
 
-hash_code hash_value(const IEEEFloat &Arg);
-int ilogb(const IEEEFloat &Arg);
-IEEEFloat scalbn(IEEEFloat X, int Exp, IEEEFloat::roundingMode);
-IEEEFloat frexp(const IEEEFloat &Val, int &Exp, IEEEFloat::roundingMode RM);
+LLVM_ABI hash_code hash_value(const IEEEFloat &Arg);
+LLVM_ABI int ilogb(const IEEEFloat &Arg);
+LLVM_ABI IEEEFloat scalbn(IEEEFloat X, int Exp, IEEEFloat::roundingMode);
+LLVM_ABI IEEEFloat frexp(const IEEEFloat &Val, int &Exp, IEEEFloat::roundingMode RM);
 
 // This mode implements more precise float in terms of two APFloats.
 // The interface and layout is designed for arbitrary underlying semantics,
 // though currently only PPCDoubleDouble semantics are supported, whose
 // corresponding underlying semantics are IEEEdouble.
-class DoubleAPFloat final : public APFloatBase {
+class LLVM_ABI DoubleAPFloat final : public APFloatBase {
   // Note: this must be the first data member.
   const fltSemantics *Semantics;
   std::unique_ptr<APFloat[]> Floats;
@@ -1357,8 +1357,8 @@ public:
 ///
 /// These additional declarations are required in order to compile LLVM with IBM
 /// xlC compiler.
-hash_code hash_value(const APFloat &Arg);
-inline APFloat scalbn(APFloat X, int Exp, APFloat::roundingMode RM) {
+LLVM_ABI hash_code hash_value(const APFloat &Arg);
+LLVM_ABI inline APFloat scalbn(APFloat X, int Exp, APFloat::roundingMode RM) {
   if (APFloat::usesLayout<detail::IEEEFloat>(X.getSemantics()))
     return APFloat(scalbn(X.U.IEEE, Exp, RM), X.getSemantics());
   if (APFloat::usesLayout<detail::DoubleAPFloat>(X.getSemantics()))

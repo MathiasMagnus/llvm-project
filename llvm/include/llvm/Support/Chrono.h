@@ -136,7 +136,7 @@ template <> struct unit<std::nano> { static const char value[]; };
 ///  display unit or you request that the unit is not displayed.
 
 template <typename Rep, typename Period>
-struct format_provider<std::chrono::duration<Rep, Period>> {
+struct LLVM_ABI format_provider<std::chrono::duration<Rep, Period>> {
 private:
   typedef std::chrono::duration<Rep, Period> Dur;
   typedef std::conditional_t<std::chrono::treat_as_floating_point<Rep>::value,

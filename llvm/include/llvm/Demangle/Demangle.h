@@ -9,6 +9,7 @@
 #ifndef LLVM_DEMANGLE_DEMANGLE_H
 #define LLVM_DEMANGLE_DEMANGLE_H
 
+#include "llvm/Support/Compiler.h"
 #include <cstddef>
 #include <string>
 #include <string_view>
@@ -32,7 +33,7 @@ enum : int {
 /// Returns a non-NULL pointer to a NUL-terminated C style string
 /// that should be explicitly freed, if successful. Otherwise, may return
 /// nullptr if mangled_name is not a valid mangling or is nullptr.
-char *itaniumDemangle(std::string_view mangled_name);
+LLVM_ABI char *itaniumDemangle(std::string_view mangled_name);
 
 enum MSDemangleFlags {
   MSDF_None = 0,
