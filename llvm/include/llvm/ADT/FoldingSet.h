@@ -831,7 +831,7 @@ struct LLVM_ABI FoldingSetTrait<std::pair<T1, T2>> {
 };
 
 template <typename T>
-struct FoldingSetTrait<T, std::enable_if_t<std::is_enum<T>::value>> {
+struct LLVM_ABI FoldingSetTrait<T, std::enable_if_t<std::is_enum<T>::value>> {
   static void Profile(const T &X, FoldingSetNodeID &ID) {
     ID.AddInteger(llvm::to_underlying(X));
   }

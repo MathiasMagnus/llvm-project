@@ -1278,7 +1278,7 @@ struct LLVM_ABI ScalarTraits<double> {
 // type.  This way endian aware types are supported whenever the traits are
 // defined for the underlying type.
 template <typename value_type, llvm::endianness endian, size_t alignment>
-struct ScalarTraits<support::detail::packed_endian_specific_integral<
+struct LLVM_ABI ScalarTraits<support::detail::packed_endian_specific_integral<
                         value_type, endian, alignment>,
                     std::enable_if_t<has_ScalarTraits<value_type>::value>> {
   using endian_type =
@@ -1302,7 +1302,7 @@ struct ScalarTraits<support::detail::packed_endian_specific_integral<
 };
 
 template <typename value_type, llvm::endianness endian, size_t alignment>
-struct ScalarEnumerationTraits<
+struct LLVM_ABI ScalarEnumerationTraits<
     support::detail::packed_endian_specific_integral<value_type, endian,
                                                      alignment>,
     std::enable_if_t<has_ScalarEnumerationTraits<value_type>::value>> {
@@ -1318,7 +1318,7 @@ struct ScalarEnumerationTraits<
 };
 
 template <typename value_type, llvm::endianness endian, size_t alignment>
-struct ScalarBitSetTraits<
+struct LLVM_ABI ScalarBitSetTraits<
     support::detail::packed_endian_specific_integral<value_type, endian,
                                                      alignment>,
     std::enable_if_t<has_ScalarBitSetTraits<value_type>::value>> {

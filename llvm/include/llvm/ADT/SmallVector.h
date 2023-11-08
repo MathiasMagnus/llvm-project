@@ -329,7 +329,7 @@ public:
 template <typename T, bool = (std::is_trivially_copy_constructible<T>::value) &&
                              (std::is_trivially_move_constructible<T>::value) &&
                              std::is_trivially_destructible<T>::value>
-class SmallVectorTemplateBase : public SmallVectorTemplateCommon<T> {
+class LLVM_ABI SmallVectorTemplateBase : public SmallVectorTemplateCommon<T> {
   friend class SmallVectorTemplateCommon<T>;
 
 protected:

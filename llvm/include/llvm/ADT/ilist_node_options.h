@@ -23,13 +23,14 @@ template <bool EnableSentinelTracking> class ilist_base;
 /// This option affects the ABI for the nodes.  When not specified explicitly,
 /// the ABI depends on LLVM_ENABLE_ABI_BREAKING_CHECKS.  Specify explicitly to
 /// enable \a ilist_node::isSentinel().
-template <bool EnableSentinelTracking> struct ilist_sentinel_tracking {};
+template <bool EnableSentinelTracking>
+struct LLVM_ABI ilist_sentinel_tracking {};
 
 /// Option to specify a tag for the node type.
 ///
 /// This option allows a single value type to be inserted in multiple lists
 /// simultaneously.  See \a ilist_node for usage examples.
-template <class Tag> struct ilist_tag {};
+template <class Tag> struct LLVM_ABI ilist_tag {};
 
 /// Option to add extra bits to the ilist_iterator.
 ///
@@ -42,7 +43,7 @@ template <bool ExtraIteratorBits> struct ilist_iterator_bits {};
 namespace ilist_detail {
 
 /// Helper trait for recording whether an option is specified explicitly.
-template <bool IsExplicit> struct explicitness {
+template <bool IsExplicit> struct LLVM_ABI explicitness {
   static const bool is_explicit = IsExplicit;
 };
 typedef explicitness<true> is_explicit;
@@ -92,11 +93,12 @@ struct LLVM_ABI
 /// custom tag type, using void as a default.
 template <class... Options> struct extract_tag;
 template <class Tag, class... Options>
-struct extract_tag<ilist_tag<Tag>, Options...> {
+struct LLVM_ABI extract_tag<ilist_tag<Tag>, Options...> {
   typedef Tag type;
 };
 template <class Option1, class... Options>
-struct extract_tag<Option1, Options...> : extract_tag<Options...> {};
+struct LLVM_ABI extract_tag<Option1, Options...>
+    : extract_tag<Options...> {};
 template <> struct extract_tag<> {
   typedef void type;
 };
@@ -121,9 +123,9 @@ struct is_valid_option<ilist_iterator_bits<IteratorBits>> : std::true_type {};
 ///
 /// The conjunction of \a is_valid_option on each individual option.
 template <class... Options> struct check_options;
-template <> struct check_options<> : std::true_type {};
+template <> struct LLVM_ABI check_options<> : std::true_type {};
 template <class Option1, class... Options>
-struct check_options<Option1, Options...>
+struct LLVM_ABI check_options<Option1, Options...>
     : std::integral_constant<bool, is_valid_option<Option1>::value &&
                                        check_options<Options...>::value> {};
 
@@ -132,7 +134,7 @@ struct check_options<Option1, Options...>
 /// This is usually computed via \a compute_node_options.
 template <class T, bool EnableSentinelTracking, bool IsSentinelTrackingExplicit,
           class TagT, bool HasIteratorBits>
-struct node_options {
+struct LLVM_ABI node_options {
   typedef T value_type;
   typedef T *pointer;
   typedef T &reference;
@@ -147,7 +149,8 @@ struct node_options {
   typedef ilist_base<enable_sentinel_tracking> list_base_type;
 };
 
-template <class T, class... Options> struct compute_node_options {
+template <class T, class... Options>
+struct LLVM_ABI compute_node_options {
   typedef node_options<T, extract_sentinel_tracking<Options...>::value,
                        extract_sentinel_tracking<Options...>::is_explicit,
                        typename extract_tag<Options...>::type,

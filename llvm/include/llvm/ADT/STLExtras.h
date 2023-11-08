@@ -1480,7 +1480,7 @@ struct LLVM_ABI on_first {
 
 /// Utility type to build an inheritance chain that makes it easy to rank
 /// overload candidates.
-template <int N> struct rank : rank<N - 1> {};
+template <int N> struct LLV_ABI rank : rank<N - 1> {};
 template <> struct rank<0> {};
 
 namespace detail {
@@ -2313,7 +2313,7 @@ private:
 };
 
 /// Infinite stream of increasing 0-based `size_t` indices.
-struct index_stream {
+struct LLVM_ABI index_stream {
   index_iterator begin() const { return {0}; }
   index_iterator end() const {
     // We approximate 'infinity' with the max size_t value, which should be good

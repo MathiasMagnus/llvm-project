@@ -27,7 +27,7 @@ namespace llvm {
 /// in a single contiguous buffer.  BinaryByteStream guarantees that no read
 /// operation will ever incur a copy.  Note that BinaryByteStream does not
 /// own the underlying buffer.
-class BinaryByteStream : public BinaryStream {
+class LLVM_ABI BinaryByteStream : public BinaryStream {
 public:
   BinaryByteStream() = default;
   BinaryByteStream(ArrayRef<uint8_t> Data, llvm::endianness Endian)
@@ -71,7 +71,7 @@ protected:
 /// MemoryBuffer object.  MemoryBufferByteStream owns the MemoryBuffer in
 /// question.  As with BinaryByteStream, reading from a MemoryBufferByteStream
 /// will never cause a copy.
-class MemoryBufferByteStream : public BinaryByteStream {
+class LLVM_ABI MemoryBufferByteStream : public BinaryByteStream {
 public:
   MemoryBufferByteStream(std::unique_ptr<MemoryBuffer> Buffer,
                          llvm::endianness Endian)
@@ -131,7 +131,7 @@ private:
 
 /// An implementation of WritableBinaryStream which can write at its end
 /// causing the underlying data to grow.  This class owns the underlying data.
-class AppendingBinaryByteStream : public WritableBinaryStream {
+class LLVM_ABI AppendingBinaryByteStream : public WritableBinaryStream {
   std::vector<uint8_t> Data;
   llvm::endianness Endian = llvm::endianness::little;
 

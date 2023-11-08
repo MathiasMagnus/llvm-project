@@ -48,7 +48,7 @@ namespace llvm {
 ///
 /// For example, \p "*[/\\]foo.{c,cpp}" will match (unix or windows) paths to
 /// all files named \p "foo.c" or \p "foo.cpp".
-class GlobPattern {
+class LLVM_ABI GlobPattern {
 public:
   /// \param Pat the pattern to match against
   /// \param MaxSubPatterns if provided limit the number of allowed subpatterns

@@ -77,7 +77,7 @@ union trivial_helper {
 } // end namespace detail
 
 template <typename T>
-struct is_copy_assignable {
+struct LLVM_ABI is_copy_assignable {
   template<class F>
     static auto get(F*) -> decltype(std::declval<F &>() = std::declval<const F &>(), std::true_type{});
     static std::false_type get(...);

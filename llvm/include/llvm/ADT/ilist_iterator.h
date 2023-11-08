@@ -366,26 +366,26 @@ template <typename From> struct simplify_type;
 ///
 /// FIXME: remove this, since there is no implicit conversion to NodeTy.
 template <class OptionsT, bool IsConst>
-struct simplify_type<ilist_iterator<OptionsT, false, IsConst>> {
+struct LLVM_ABI simplify_type<ilist_iterator<OptionsT, false, IsConst>> {
   using iterator = ilist_iterator<OptionsT, false, IsConst>;
   using SimpleType = typename iterator::pointer;
 
   static SimpleType getSimplifiedValue(const iterator &Node) { return &*Node; }
 };
 template <class OptionsT, bool IsConst>
-struct simplify_type<const ilist_iterator<OptionsT, false, IsConst>>
+struct LLVM_ABI simplify_type<const ilist_iterator<OptionsT, false, IsConst>>
     : simplify_type<ilist_iterator<OptionsT, false, IsConst>> {};
 
 // ilist_iterator_w_bits should also be accessible via isa/dyn_cast.
 template <class OptionsT, bool IsConst>
-struct simplify_type<ilist_iterator_w_bits<OptionsT, false, IsConst>> {
+struct LLVM_ABI simplify_type<ilist_iterator_w_bits<OptionsT, false, IsConst>> {
   using iterator = ilist_iterator_w_bits<OptionsT, false, IsConst>;
   using SimpleType = typename iterator::pointer;
 
   static SimpleType getSimplifiedValue(const iterator &Node) { return &*Node; }
 };
 template <class OptionsT, bool IsConst>
-struct simplify_type<const ilist_iterator_w_bits<OptionsT, false, IsConst>>
+struct LLVM_ABI simplify_type<const ilist_iterator_w_bits<OptionsT, false, IsConst>>
     : simplify_type<ilist_iterator_w_bits<OptionsT, false, IsConst>> {};
 
 } // end namespace llvm

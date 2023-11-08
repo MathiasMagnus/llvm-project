@@ -159,7 +159,7 @@ public:
 /// forward-declares Foo and specializes IntrusiveRefCntPtrInfo<Foo>.  Then
 /// Bar.h could use IntrusiveRefCntPtr<Foo>, although it still couldn't call any
 /// functions on Foo itself, because Foo would be an incomplete type.
-template <typename T> struct IntrusiveRefCntPtrInfo {
+template <typename T> struct LLVM_ABI IntrusiveRefCntPtrInfo {
   static unsigned useCount(const T *obj) { return obj->UseCount(); }
   static void retain(T *obj) { obj->Retain(); }
   static void release(T *obj) { obj->Release(); }

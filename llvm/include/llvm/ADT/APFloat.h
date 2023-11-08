@@ -769,15 +769,15 @@ public:
   friend hash_code hash_value(const DoubleAPFloat &Arg);
 };
 
-hash_code hash_value(const DoubleAPFloat &Arg);
-DoubleAPFloat scalbn(const DoubleAPFloat &Arg, int Exp, IEEEFloat::roundingMode RM);
-DoubleAPFloat frexp(const DoubleAPFloat &X, int &Exp, IEEEFloat::roundingMode);
+LLVM_ABI hash_code hash_value(const DoubleAPFloat &Arg);
+LLVM_ABI DoubleAPFloat scalbn(const DoubleAPFloat &Arg, int Exp, IEEEFloat::roundingMode RM);
+LLVM_ABI DoubleAPFloat frexp(const DoubleAPFloat &X, int &Exp, IEEEFloat::roundingMode);
 
 } // End detail namespace
 
 // This is a interface class that is currently forwarding functionalities from
 // detail::IEEEFloat.
-class APFloat : public APFloatBase {
+class LLVM_ABI APFloat : public APFloatBase {
   typedef detail::IEEEFloat IEEEFloat;
   typedef detail::DoubleAPFloat DoubleAPFloat;
 
