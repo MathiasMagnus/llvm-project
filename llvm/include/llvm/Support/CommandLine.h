@@ -1412,7 +1412,7 @@ public:
 //
 template <class DataType, bool ExternalStorage = false,
           class ParserClass = parser<DataType>>
-class LLVM_ABI opt
+class opt
     : public Option,
       public opt_storage<DataType, ExternalStorage, std::is_class_v<DataType>> {
   ParserClass Parser;
@@ -1504,11 +1504,11 @@ public:
       [](const typename ParserClass::parser_data_type &) {};
 };
 
-extern template class opt<unsigned>;
-extern template class opt<int>;
-extern template class opt<std::string>;
-extern template class opt<char>;
-extern template class opt<bool>;
+extern template class LLVM_ABI opt<unsigned>;
+extern template class LLVM_ABI opt<int>;
+extern template class LLVM_ABI opt<std::string>;
+extern template class LLVM_ABI opt<char>;
+extern template class LLVM_ABI opt<bool>;
 
 //===----------------------------------------------------------------------===//
 // Default storage class definition: external storage.  This implementation

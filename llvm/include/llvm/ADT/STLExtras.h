@@ -1480,8 +1480,8 @@ struct LLVM_ABI on_first {
 
 /// Utility type to build an inheritance chain that makes it easy to rank
 /// overload candidates.
-template <int N> struct LLV_ABI rank : rank<N - 1> {};
-template <> struct rank<0> {};
+template <int N> struct LLVM_ABI rank : rank<N - 1> {};
+template <> struct LLVM_ABI rank<0> {};
 
 namespace detail {
 template <typename... Ts> struct Visitor;

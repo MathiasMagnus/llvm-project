@@ -476,7 +476,7 @@ void SmallVectorTemplateBase<T, TriviallyCopyable>::takeAllocationForGrow(
 /// T's. This allows using memcpy in place of copy/move construction and
 /// skipping destruction.
 template <typename T>
-class LLVM_ABI SmallVectorTemplateBase<T, true> : public SmallVectorTemplateCommon<T> {
+class SmallVectorTemplateBase<T, true> : public SmallVectorTemplateCommon<T> {
   friend class SmallVectorTemplateCommon<T>;
 
 protected:
@@ -1118,7 +1118,7 @@ struct LLVM_ABI SmallVectorStorage {
 /// We need the storage to be properly aligned even for small-size of 0 so that
 /// the pointer math in \a SmallVectorTemplateCommon::getFirstEl() is
 /// well-defined.
-template <typename T> struct LLVM_ABI alignas(T) SmallVectorStorage<T, 0> {};
+template <typename T> struct alignas(T) SmallVectorStorage<T, 0> {};
 
 /// Forward declaration of SmallVector so that
 /// calculateSmallVectorDefaultInlinedElements can reference

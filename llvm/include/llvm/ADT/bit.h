@@ -171,7 +171,7 @@ template <typename T, std::size_t SizeOfT> struct LLVM_ABI TrailingZerosCounter 
 };
 
 #if defined(__GNUC__) || defined(_MSC_VER)
-template <typename T> struct LLVM_ABI TrailingZerosCounter<T, 4> {
+template <typename T> struct TrailingZerosCounter<T, 4> {
   static unsigned count(T Val) {
     if (Val == 0)
       return 32;
@@ -187,7 +187,7 @@ template <typename T> struct LLVM_ABI TrailingZerosCounter<T, 4> {
 };
 
 #if !defined(_MSC_VER) || defined(_M_X64)
-template <typename T> struct LLVM_ABI TrailingZerosCounter<T, 8> {
+template <typename T> struct TrailingZerosCounter<T, 8> {
   static unsigned count(T Val) {
     if (Val == 0)
       return 64;
@@ -237,7 +237,7 @@ template <typename T, std::size_t SizeOfT> struct LLVM_ABI LeadingZerosCounter {
 };
 
 #if defined(__GNUC__) || defined(_MSC_VER)
-template <typename T> struct LLVM_ABI LeadingZerosCounter<T, 4> {
+template <typename T> struct LeadingZerosCounter<T, 4> {
   static unsigned count(T Val) {
     if (Val == 0)
       return 32;
@@ -253,7 +253,7 @@ template <typename T> struct LLVM_ABI LeadingZerosCounter<T, 4> {
 };
 
 #if !defined(_MSC_VER) || defined(_M_X64)
-template <typename T> struct LLVM_ABI LeadingZerosCounter<T, 8> {
+template <typename T> struct LeadingZerosCounter<T, 8> {
   static unsigned count(T Val) {
     if (Val == 0)
       return 64;
@@ -362,7 +362,7 @@ template <typename T, std::size_t SizeOfT> struct LLVM_ABI PopulationCounter {
   }
 };
 
-template <typename T> struct LLVM_ABI PopulationCounter<T, 8> {
+template <typename T> struct PopulationCounter<T, 8> {
   static int count(T Value) {
 #if defined(__GNUC__)
     return (int)__builtin_popcountll(Value);

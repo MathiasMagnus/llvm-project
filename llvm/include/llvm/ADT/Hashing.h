@@ -355,7 +355,7 @@ inline uint64_t get_execution_seed() {
 // for equality. For all the platforms we care about, this holds for integers
 // and pointers, but there are platforms where it doesn't and we would like to
 // support user-defined types which happen to satisfy this property.
-template <typename T> struct LLVM_ABI is_hashable_data
+template <typename T> struct is_hashable_data
   : std::integral_constant<bool, ((is_integral_or_enum<T>::value ||
                                    std::is_pointer<T>::value) &&
                                   64 % sizeof(T) == 0)> {};
@@ -364,7 +364,7 @@ template <typename T> struct LLVM_ABI is_hashable_data
 // is no alignment-derived padding in the pair. This is a bit of a lie because
 // std::pair isn't truly POD, but it's close enough in all reasonable
 // implementations for our use case of hashing the underlying data.
-template <typename T, typename U> struct LLVM_ABI is_hashable_data<std::pair<T, U> >
+template <typename T, typename U> struct is_hashable_data<std::pair<T, U> >
   : std::integral_constant<bool, (is_hashable_data<T>::value &&
                                   is_hashable_data<U>::value &&
                                   (sizeof(T) + sizeof(U)) ==

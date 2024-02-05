@@ -68,18 +68,18 @@ namespace llvm {
 ///
 /// This class defines virtual methods, dynamicClassID and isA, that enable
 /// type comparisons.
-class LLVM_ABI RTTIRoot {
+class RTTIRoot {
 public:
-  virtual ~RTTIRoot() = default;
+  LLVM_ABI virtual ~RTTIRoot() = default;
 
   /// Returns the class ID for this type.
-  static const void *classID() { return &ID; }
+  LLVM_ABI static const void *classID() { return &ID; }
 
   /// Returns the class ID for the dynamic type of this RTTIRoot instance.
-  virtual const void *dynamicClassID() const = 0;
+  LLVM_ABI virtual const void *dynamicClassID() const = 0;
 
   /// Returns true if this class's ID matches the given class ID.
-  virtual bool isA(const void *const ClassID) const {
+  LLVM_ABI virtual bool isA(const void *const ClassID) const {
     return ClassID == classID();
   }
 
